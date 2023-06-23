@@ -1,0 +1,154 @@
+<section class="section" style="margin-top: 100px">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title">Vos Contrats</h2>
+          <mat-form-field appearance="outline">
+            <mat-label>Search Contrat</mat-label>
+            <input matInput  [(ngModel)]="searchedContrat">
+            <mat-icon style="color: navy" matSuffix>search</mat-icon>
+          </mat-form-field>
+
+          <!-- Table with stripped rows -->
+          <div
+            class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns"
+          >
+            <button
+              (click)="openAddContratDialog()"
+              mat-raised-button=""
+              color="primary"
+              class="mb-4 mdc-button mdc-button--raised mat-mdc-raised-button mat-primary mat-mdc-button-base"
+            >
+                <span
+                  class="mat-mdc-button-persistent-ripple mdc-button__ripple"
+                ></span
+                ><i class="fa-solid fa-plus" style="margin-right: 10px"></i><span class="mdc-button__label">Add Contrat</span
+            ><span class="mat-mdc-focus-indicator"></span
+            ><span
+              matripple=""
+              class="mat-ripple mat-mdc-button-ripple"
+            ></span
+            ><span class="mat-mdc-button-touch-target"></span>
+            </button>
+            <div class="dataTable-container">
+              <table class="table datatable dataTable-table">
+                <thead>
+                  <tr>
+                    <th scope="col" data-sortable="" style="width: 9.203%">
+                      Specialite
+                    </th>
+                    <th scope="col" data-sortable="" style="width: 28.0558%">
+                      Date Debut
+                    </th>
+                    <th scope="col" data-sortable="" style="width: 37.7949%">
+                      Date Fin
+                    </th>
+                    <th scope="col" data-sortable="" style="width: 19.2995%">
+                      Status
+                    </th>
+                    <th scope="col" data-sortable="" style="width: 19.2995%">
+                      Montant
+                    </th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let contrat of contrats | searchTarget:searchedContrat |  paginate: { itemsPerPage: 2, currentPage: PageNumber}">
+                  <tr>
+                    <!--                    <th scope="row">{{ contrat.idContrat }}</th>-->
+                    <td style="color: #256d85">{{ contrat.specialite }}</td>
+                    <td style="color: #7743db">
+                      {{ contrat.dateDebutContrat }}
+                    </td>
+                    <td style="color: #d23369">{{ contrat.dateFinContrat }}</td>
+                    <td
+                      style="font-weight: bold"
+                      [ngStyle]="
+                        contrat.archive ? { color: 'green' } : { color: 'red' }
+                      "
+                    >
+                      {{ contrat.archive ? 'Archive' : 'Not Archive' }}
+                    </td>
+                    <td>
+                      {{ contrat.montantContrat }}
+                      <i
+                        style="color: green; font-weight: bold"
+                        class="fa-solid fa-dollar-sign"
+                      ></i>
+                    </td>
+                    <td style="display: flex; gap: 8px">
+                      <button
+                        mat-fab
+                        (click)="deleteContrat(contrat.idContrat)"
+                        style="
+                          width: 30px;
+                          height: 30px;
+                          display: flex;
+                          justify-content: center;
+                          align-items: center;
+                        "
+                        color="primary"
+                        aria-label="Example icon button with a delete icon"
+                      >
+                        <mat-icon
+                          style="height: 18px; width: 18px; font-size: 18px"
+                          >delete</mat-icon
+                        >
+                      </button>
+                      <button
+                        mat-fab
+                        (click)="openEditContratDialog(contrat)"
+                        style="
+                          width: 30px;
+                          height: 30px;
+                          display: flex;
+                          justify-content: center;
+                          align-items: center;
+                        "
+                        color="accent"
+                        aria-label="Example icon button with a delete icon"
+                      >
+                        <i style="font-size: 12px" class="bi bi-gear"></i>
+                      </button>
+
+                      <button
+                        mat-fab
+                        (click)="generateContratPDF(contrat.idContrat)"
+                        style="
+                          width: 30px;
+                          height: 30px;
+                          display: flex;
+                          justify-content: center;
+                          align-items: center;
+                        "
+                        color="warn"
+                        aria-label="Example icon button with a delete icon"
+                      >
+                        <mat-icon>print</mat-icon>
+                      </button>
+
+                    </td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="dataTable-bottom">
+
+
+            </div>
+          </div>
+          <!-- End Table with stripped rows -->
+        </div>
+        <div class="card-footer d-flex justify-content-end">
+          <pagination-controls (pageChange)="PageNumber = $event"></pagination-controls>
+        </div>
+      </div>
+    </div>
+<!--    <div class="col-md-4 offset-md-3">-->
+<!--      <app-archive-stats></app-archive-stats>-->
+<!--    </div>-->
+  </div>
+</section>
+
+

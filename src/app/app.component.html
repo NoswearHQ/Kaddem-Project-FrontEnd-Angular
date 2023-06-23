@@ -1,0 +1,6 @@
+<app-header [usernameHeader]="currentUsername" ></app-header>
+<app-sidebar *ngIf="currentUsername!=null"></app-sidebar>
+<app-footer></app-footer>
+<app-login (newUsernameEvent)="addUsername($event)" *ngIf="currentUsername==null"></app-login>
+<div><router-outlet *ngIf="currentUsername!=null"></router-outlet></div>
+

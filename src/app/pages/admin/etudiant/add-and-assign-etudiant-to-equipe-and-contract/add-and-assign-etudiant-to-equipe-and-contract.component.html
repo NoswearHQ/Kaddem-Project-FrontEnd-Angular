@@ -1,0 +1,25 @@
+<h2 class="card-title">Affecter un departement a un etudiant</h2>
+
+<form class="row g-3" >
+
+  <select  name="cars" class="form-control form-control-lg" (change)="ChangeEtu($event)">
+    <option selected="selected">Choisisser un etudiant</option>
+    <option *ngFor="let etudiant of etudiants;">{{etudiant.nomE}}</option>
+  </select>
+  <select class="form-control form-control-lg" (change)="ChangeEqu($event)">
+    <option selected="selected">Choisisser une equipe</option>
+    <option *ngFor="let equipe of equipes;">{{equipe.nomEquipe}}</option>
+  </select>
+  <select  name="cars" class="form-control form-control-lg" (change)="ChangeCon($event)">
+    <option selected="selected">Choisisser un contrat</option>
+    <option *ngFor="let contrat of contrats;"><p>{{contrat.specialite}} </p> &nbsp;<p>{{contrat.dateDebutContrat}}</p> &nbsp;<p>{{contrat.dateFinContrat}}</p> &nbsp;<p>{{contrat.montantContrat}}</p> </option>
+  </select>
+
+  <button
+    (click)="upadteEtudiant()"
+    type="submit"
+    class="btn btn-outline-secondary mx-2"
+  >
+    <i class="fa-solid fa-pen-nib pe-2"></i>Affect
+  </button>
+</form>
